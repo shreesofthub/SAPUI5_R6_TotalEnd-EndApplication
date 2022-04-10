@@ -1,0 +1,67 @@
+<mvc:View xmlns:upload="sap.m.upload" controllerName="r6tableandlist.controller.view3"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns:uni="sap.ui.unified">
+    <Page id="idPage3" title="Creation of New Product" showNavButton="true" navButtonPress="onBack">
+        <f:SimpleForm title="Add Product Details" id="idV3SF" layout="ResponsiveGridLayout" labelSpanL="2" labelSpanM="2" emptySpanL="8" emptySpanM="8" editable="true">
+            <f:content>
+                <Label id="idV3Lbl1" text="Product ID" required="true"></Label>
+                <Input id="idV3Ip1" maxLength="6"></Input>
+                <Label id="idV3Lbl2" text="Product Name"></Label>
+                <Input id="idV3Ip2"></Input>
+                <Label id="idV3Lbl3" text="Product Description"></Label>
+                <Input id="idV3Ip3"></Input>
+                <Label id="idV3Lbl4" text="Product Price"></Label>
+                <Input id="idV3Ip4"></Input>
+                <Label id="idV3Lbl5" text="Currency Code"></Label>
+                <Input id="idV3Ip5"></Input>
+                <Label id="idV3Lbl6" text="Product Status"></Label>
+                <Input id="idV3Ip6"></Input>
+            </f:content>
+        </f:SimpleForm>
+        <Table id="idV3Table" headerText="Add Suppliers" alternateRowColors="true">
+            <columns>
+                <Column id="idV3Col1">
+                    <Title id="idV3ColT1" text="Supplier ID"></Title>
+                </Column>
+                <Column id="idV3Col2">
+                    <Title id="idV3ColT2" text="Product ID"></Title>
+                </Column>
+                <Column id="idV3Col3">
+                    <Title id="idV3ColT3" text="Supplier Name"></Title>
+                </Column>
+                <Column id="idV3Col4">
+                    <Title id="idV3ColT4" text="Supplier Location"></Title>
+                </Column>
+                <Column id="idV3Col5">
+                    <Title id="idV3ColT5" text="Action"></Title>
+                </Column>
+            </columns>
+            <infoToolbar>
+                <Toolbar id="idV3TBar">
+                    <Bar id="idV3Bar1">
+                        <contentRight>
+                            <Button id="idV3Btn" icon="sap-icon://add" press="onAdd" type="Accept"/>
+                        </contentRight>
+                    </Bar>
+                </Toolbar>
+            </infoToolbar>
+        </Table>
+        <Panel id="idPanleUploader" headerText="Attachments">
+                    <uni:FileUploader id="fileUploader" useMultipart="false" name="myFileUpload" 
+                    uploadUrl="/sap/opu/odata/sap/ZSHREE_PRODUCTS_SRV/attachmentsSet" width="400px" 
+                    tooltip="Upload your file to the local server" uploadComplete="handleUploadComplete"/>
+                    <Button id="idUploadBtn" press="onUpload" icon="sap-icon://upload" text="upload"/>  
+        </Panel>
+        <footer>
+            <Bar id="idV3Bar">
+                <contentRight>
+                    <Button id="idV3BtnS" text="Save" icon="sap-icon://save" type="Accept" press="onSave"></Button>
+                    <Button id="idV3BtnC" text="Cancel" icon="sap-icon://cancel" type="Reject" press="onCancel"></Button>
+                </contentRight>
+            </Bar>
+        </footer>
+    </Page>
+</mvc:View>          

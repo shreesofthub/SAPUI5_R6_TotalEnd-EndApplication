@@ -1,0 +1,29 @@
+<mvc:View controllerName="r6tableandlist.controller.view4"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form">
+    <Page id="idPage4" title="Edit the Selected Product " showNavButton="true" navButtonPress="onBack">
+        <f:SimpleForm id="idV4SF" title="Edit" layout="ResponsiveGridLayout" labelSpanL="1" labelSpanM="1" emptySpanL="8" emptySpanM="8" editable="true">
+            <Label id="idV4L1" text="Product ID"/>
+            <Input id="idV4I1" value="{Prdid}" enabled="false"/>
+            <Label id="idV4L2" text="Product Name"/>
+            <Input id="idV4I2" value="{Prdname}"/>
+            <Label id="idV4L3" text="Product Description"/>
+            <Input id="idV4I3" value="{Prddesc}"/>
+            <Label id="idV4L4" text="Product Price"/>
+            <Input id="idV4I4" value="{Prdprice}"/>
+            <Label id="idV4L5" text="Currency"/>
+            <Input id="idV4I5" value="{Currcode}"/>
+            <Label id="idV4L6" text="Status"/>
+            <Input id="idV4I6" value="{Status}"/>
+        </f:SimpleForm>
+        <footer>
+            <Bar id="idV4Bar">
+                <contentRight>
+                    <Button id="idV4Btn1" text="Save" icon="sap-icon://save" press="onSave"></Button>
+                    <Button id="idV4Btn2" text="Cancel" icon="sap-icon://cancel" press="onBack"></Button>
+                </contentRight>
+            </Bar>
+        </footer>
+    </Page>
+</mvc:View>

@@ -1,0 +1,167 @@
+{
+    "_version": "1.32.0",
+    "sap.app": {
+        "id": "r6tableandlist",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "dataSources": {
+            "mainService": {
+                "uri": "/sap/opu/odata/sap/ZSHREE_PRODUCTS_SRV/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": true,
+        "dependencies": {
+            "minUI5Version": "1.99.0",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.f": {},
+                "sap.suite.ui.generic.template": {},
+                "sap.ui.comp": {},
+                "sap.ui.generic.app": {},
+                "sap.ui.table": {},
+                "sap.ushell": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "r6tableandlist.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {}
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ],
+            "js": [
+                {
+                    "uri": "libs/jspdf.debug.js"
+                },
+                {
+                    "uri": "libs/jspdf.plugin.autotable.min.js"
+                },
+                {
+                    "uri": "libs/filesaver.js"
+                }
+            ]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "async": true,
+                "viewPath": "r6tableandlist.view",
+                "controlAggregation": "pages",
+                "controlId": "app",
+                "clearControlAggregation": false
+            },
+            "routes": [
+                {
+                    "name": "default",
+                    "pattern": "",
+                    "target": [
+                        "defaultTarget"
+                    ]
+                },
+                {
+                    "name": "view2",
+                    "pattern": "view2/{key}",
+                    "target": "view2Target"
+                },
+                {
+                    "name": "view3",
+                    "pattern": "view3",
+                    "target": "view3Target"
+                },
+                {
+                    "name": "view4",
+                    "pattern": "view4/{key}",
+                    "target": "view4Target"
+                }
+            ],
+            "targets": {
+                "defaultTarget": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "View1",
+                    "viewName": "View1"
+                },
+                "view2Target": {
+                    "viewType": "XML",
+                    "viewName": "view2",
+                    "viewId": "view2",
+                    "clearControlAggregation": false,
+                    "transition": "slide"
+                },
+                "view3Target": {
+                    "viewType": "XML",
+                    "viewName": "view3",
+                    "viewId": "view3",
+                    "clearControlAggregation": false,
+                    "transition": "slide"
+                },
+                "view4Target": {
+                    "viewType": "XML",
+                    "viewName": "view4",
+                    "viewId": "view4",
+                    "clearControlAggregation": false,
+                    "transition": "slide"
+                }
+            }
+        },
+        "rootView": {
+            "viewName": "r6tableandlist.view.appview",
+            "type": "XML",
+            "async": true,
+            "id": "appview"
+        }
+    },
+    "sap.cloud": {
+        "public": true,
+        "service": "r6tableandlist"
+    }
+}

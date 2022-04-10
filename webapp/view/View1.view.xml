@@ -1,0 +1,107 @@
+<mvc:View controllerName="r6tableandlist.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:c="sap.ui.core">
+    <Page id="page" title="{i18n>title}">
+        <headerContent>
+            <RadioButtonGroup id="idRbg" columns="2" selectedIndex="0" select="onRbSelect">
+                <RadioButton id="idRbT" text="Display in Table"></RadioButton>
+                <RadioButton id="idRbL" text="Display in List"></RadioButton>
+            </RadioButtonGroup>
+        </headerContent>
+        <Panel id="idPanel" headerText="Search Products" expandable="true" expanded="true">
+            <f:SimpleForm id='idSF' layout="ResponsiveGridLayout" columnsL="2" columnsM="2" labelSpanL="2" labelSpanM="2" editable="true">
+                <c:Title id="idCoreTitle1" text="Filter:" />
+                <Label id="idLabId" text="Product ID" />
+                <Input id="idPrdId" showValueHelp="true" valueHelpRequest="onValueHelp"></Input>
+                <Select id="idSel" items="{/productsSet}" visible="false">
+                    <c:Item id="idSelItem" key="{Prdid}" text="{Prdname}"></c:Item>
+                </Select>
+                <Label id="idLabPrice" text="Price"></Label>
+                <RadioButtonGroup id="idRbgS" selectedIndex="-1" columns="2" buttons="{searchModel>/aPrices}">
+                    <RadioButton id="idRbPrice1" text="{searchModel>price}"></RadioButton>
+                </RadioButtonGroup>
+                <c:Title id="idCoreTitle2"></c:Title>
+                <Label id="idLabStatus" text="Status"/>
+                <MultiComboBox id="idMComB" items="{searchModel>/statuses}">
+                    <c:Item id="idMCBItem" key="{searchModel>code}" text="{searchModel>status}"/>
+                </MultiComboBox>
+                <Label id="idLabCurr" text="Currency"/>
+                <ComboBox id="idComB" items="{searchModel>/currencies}">
+                    <c:Item id="idComBItem" key="{}" text="{searchModel>currency}"/>
+                </ComboBox>
+                <c:Title id="idCoreTitle3" text="Sort:"></c:Title>
+                <Label id="idLblSort" text="Sort By"></Label>
+                <ComboBox id="idComBSort" items="{searchModel>/sort}">
+                    <c:Item id="idComBItemSort" key="{searchModel>field}" text="{searchModel>desc}"/>
+                </ComboBox>
+                <Label id="idLblSort2" text="Order"></Label>
+                <RadioButtonGroup id="idRbGSort" selectedIndex="-1" columns="2" buttons="{searchModel>/orders}">
+                    <RadioButton id="idRbSort1" text="{searchModel>order}"></RadioButton>
+                </RadioButtonGroup>
+            </f:SimpleForm>
+            <FlexBox id="idFlexB" justifyContent="End">
+                <Button id="idBtnSearch" text="Apply" press="onSearch" type="Accept" icon="sap-icon://search" class="sapUiTinyMarginEnd"></Button>
+                <Button id="idBtnReset" text="Reset" press="onReset" icon="sap-icon://reset" type="Reject"/>
+            </FlexBox>
+        </Panel>
+        <Table id="idTable" headerText ="List of Products" alternateRowColors="true" items="{/productsSet}" >
+            <columns>
+                <Column id="idPidC">
+                    <Text id="idPidH" text="Product ID"/>
+                </Column>
+                <Column id="idPnameC">
+                    <Text id="idPnameH" text="Product Name"/>
+                </Column>
+                <Column id="idPdescC">
+                    <Text id="idPdescH" text="Description"/>
+                </Column>
+                <Column id="idPpriceC">
+                    <Text id="idPpriceH" text="Price"/>
+                </Column>
+                <Column id="idPcurrCodeC">
+                    <Text id="idPcurrCodeH" text="Currency Code"/>
+                </Column>
+                <Column id="idPstatusC">
+                    <Text id="idPstatusH" text="Status"/>
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem id="idItems" type="Navigation" press="onProductSelection">
+                    <cells>
+                        <Text id="idPidI" text="{Prdid}"></Text>
+                        <Text id="idPnameI" text="{Prdname}"></Text>
+                        <Text id="idPdescI" text="{Prddesc}"></Text>
+                        <Text id="idPpriceI" text="{Prdprice}"></Text>
+                        <Text id="idPcurrI" text="{Currcode}"></Text>
+                        <Text id="idPstatI" text="{Status}" visible="false"></Text>
+                        <ObjectStatus id="idPstatI1" text="{Status}" state="{path:'Status',formatter:'.f.colorStatus'}"></ObjectStatus>
+                    </cells>
+                </ColumnListItem>
+            </items>
+            <headerToolbar>
+                <Toolbar id="idV1Tbar">
+                    <ToolbarSpacer id="idTbarSpacer"/>
+                    <Button id="idBtnPdf"   icon="sap-icon://pdf-attachment" press="onPdfDownlaod"></Button>
+                    <Button id="idBtnExcel" icon="sap-icon://excel-attachment" press="onExcelDownlaod"></Button>
+                </Toolbar>
+            </headerToolbar>
+        </Table>
+        <List id="idList" items="{/productsSet}" headerText="List of Products">
+            <items>
+                <ObjectListItem id="idOlist" intro="{Prddesc}" number="{Prdprice}" numberUnit="{Currcode}" title="{Prdid}-{Prdname}">
+                    <firstStatus>
+                        <ObjectStatus id="idObjSts" text="{Status}" state="{path:'Status',formatter:'.f.colorStatus'}"></ObjectStatus>
+                    </firstStatus>
+                </ObjectListItem>
+            </items>
+        </List>
+        <footer>
+            <Toolbar id="idToolbar">
+                <ToolbarSpacer id="idTbSpacer"/>
+                <Button id="idBtnNew" text="Create" icon="sap-icon://add" type="Emphasized" press="onCreation"></Button>
+            </Toolbar>
+        </footer>
+    </Page>
+</mvc:View>

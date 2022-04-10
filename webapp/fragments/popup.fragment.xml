@@ -1,0 +1,22 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+    xmlns="sap.m">
+    <Dialog id="idDialog" title="F4 Help for Product ID" contentHeight="50%" contentWidth="30%">
+        <Table id="idDialogTable" items="{/productsSet}" mode="SingleSelectMaster" selectionChange="onDialogValueSelection">
+            <columns>
+                <Column id="idCol1">
+                    <Text id="idCol1T" text="Product ID"></Text>
+                </Column>
+                <Column id="idCol2">
+                    <Text id="idCol2T" text="Product ID"></Text>
+                </Column>
+            </columns>
+            <ColumnListItem id="idColList">
+                <Text id="idTextValue1" text="{Prdid}"/>
+                <Text id="idTextValue2" text="{Prdname}"/>
+            </ColumnListItem>
+        </Table>
+        <endButton>
+            <Button id="idDialogBtn1" text="close" press="onDialogClose"></Button>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

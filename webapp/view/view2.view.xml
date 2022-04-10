@@ -1,0 +1,110 @@
+<mvc:View controllerName="r6tableandlist.controller.view2"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form">
+    <Page id="idPage2">
+        <customHeader>
+            <Bar id="idBar">
+                <contentLeft>
+                    <Button id="idBtnV2" icon="sap-icon://nav-back" press="onBack"></Button>
+                </contentLeft>
+                <contentMiddle>
+                    <Title id="idV2Title" text="Display Selecetd Product" width ="100%" class="sapMH2FontSize"></Title>
+                </contentMiddle>
+            </Bar>
+        </customHeader>
+        <ObjectHeader id="idOHv2" number="{Prdprice}" numberUnit="{Currcode}" title="{Prdname}" backgroundDesign="Solid">
+            <ObjectAttribute id="idObjeAtt" title="{Prdid}"></ObjectAttribute>
+            <ObjectAttribute id="idObjeAtt1" title="{Prddesc}"/>
+            <statuses>
+                <ObjectStatus id="idObjeSts" text="{Status}" state="{path:'Status',formatter:'.f.colorStatus'}"></ObjectStatus>
+            </statuses>
+        </ObjectHeader>
+        <IconTabBar id="idIconBar">
+            <items>
+                <IconTabFilter id="idInfoTabFilter" icon="sap-icon://information">
+                    <f:SimpleForm id="idSFIcon" title="More Information" layout="ResponsiveGridLayout" emptySpanL="7" emptySpanM="7">
+                        <Label id="idInfoLbl1" text="Product ID"/>
+                        <Text id="idIconTxt1" text="{Prdid}"/>
+                        <Label id="idInfoLbl2" text="Product Name"/>
+                        <Text id="idIconTxt12" text="{Prdname}"/>
+                        <Label id="idInfoLbl3" text="Product Description"/>
+                        <Text id="idIconTxt3" text="{Prddesc}"/>
+                        <Label id="idInfoLbl4" text="Product Price"/>
+                        <Text id="idIconTxt4" text="{Prdprice}"/>
+                        <Label id="idInfoLbl5" text="Currency"/>
+                        <Text id="idIconTxt5" text="{Currcode}"/>
+                        <Label id="idInfoLbl6" text="Product Status"/>
+                        <Text id="idIconTxt6" text="{Status}"/>
+                    </f:SimpleForm>
+                </IconTabFilter>
+                <IconTabFilter id="idSuppTabFilter" icon="sap-icon://supplier">
+                    <content>
+                        <Table id="idSuppTable" items="{toSuppliers}" headerText="Suppliers Information">
+                            <columns>
+                                <Column id="idCol1">
+                                    <Title id="idCol1Titl" text="Supplier ID"></Title>
+                                </Column>
+                                <Column id="idCol2">
+                                    <Title id="idCol1Tit2" text="Supplier Name"></Title>
+                                </Column>
+                                <Column id="idCol3">
+                                    <Title id="idCol1Tit3" text="Supplier Location"></Title>
+                                </Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem id="idColSuppListItem">
+                                    <cells>
+                                        <Text id="idSuppTxt1" text="{Supid}"></Text>
+                                        <Text id="idSuppTxt2" text="{Supname}"></Text>
+                                        <Text id="idSuppTxt3" text="{Suploc}"></Text>
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </content>
+                </IconTabFilter>
+                <IconTabFilter id="idAttachments" icon="sap-icon://attachment">
+                    <Table id="idAttachment" items="{toAttachments}">
+                        <columns>
+                            <Column id="idCol1A">
+                                <Title id="idTitle1A" text="Product ID"></Title>
+                            </Column>
+                            <Column id="idCol2A">
+                                <Title id="idTitle2A" text="File Name"></Title>
+                            </Column>
+                            <Column id="idCol3A">
+                                <Title id="idTitle3A" text="File Type"></Title>
+                            </Column>
+                            <Column id="idCol4A">
+                                <Title id="idTitle4A" text="Downlaod"></Title>
+                            </Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem id="idColLitsA">
+                                <Text id="idAttachTxt1" text="{Prdid}"></Text>
+                                <Text id="idAttachTxt2" text="{Filename}"></Text>
+                                <Text id="idAttachTxt3" text="{Filetype}"></Text>
+                                <Button id="idAttachBtn1" icon="sap-icon://download" press="onAttachDownload"/>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </IconTabFilter>
+                <IconTabFilter id="idFiledisplay" icon="sap-icon://add-photo">
+                    <Carousel id="idCarousel" pages="{toAttachments}">
+                        <pages>
+                            <Image id="idImage" src="/sap/opu/odata/sap/ZSHREE_PRODUCTS_SRV/attachmentsSet(Prdid='{Prdid}',Filename='{Filename}')/$value"></Image>
+                        </pages>
+                    </Carousel>
+                </IconTabFilter>
+            </items>
+        </IconTabBar>
+        <footer>
+            <Toolbar id="idV2TB">
+                <ToolbarSpacer id="idV1TS"/>
+                <Button id="idV1BtnS" text="Edit" type="Accept" icon="sap-icon://edit" press="onEdit"></Button>
+                <Button id="idV1BtnD" text="Delete" type="Reject" icon="sap-icon://delete" press="onDelete"/>
+            </Toolbar>
+        </footer>
+    </Page>
+</mvc:View>

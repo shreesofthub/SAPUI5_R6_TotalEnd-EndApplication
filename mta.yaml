@@ -1,0 +1,94 @@
+_schema-version: "3.2"
+ID: r6tableandlist
+description: Display Table and List from Back-end ODATA service Data
+version: 0.0.1
+modules:
+- name: r6tableandlist-dest-content
+  type: com.sap.application.content
+  requires:
+  - name: r6tableandlist-dest-srv
+    parameters:
+      content-target: true
+  - name: r6tableandlist-repo-host
+    parameters:
+      service-key:
+        name: r6tableandlist-repo-host-key
+  - name: r6tableandlist-uaa
+    parameters:
+      service-key:
+        name: r6tableandlist-uaa-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: r6tableandlist_repo_host
+          ServiceInstanceName: r6tableandlist-html5-srv
+          ServiceKeyName: r6tableandlist-repo-host-key
+          sap.cloud.service: r6tableandlist
+        - Authentication: OAuth2UserTokenExchange
+          Name: r6tableandlist_uaa
+          ServiceInstanceName: r6tableandlist-xsuaa-srv
+          ServiceKeyName: r6tableandlist-uaa-key
+          sap.cloud.service: r6tableandlist
+        existing_destinations_policy: ignore
+  build-parameters:
+    no-source: true
+- name: r6tableandlist-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: r6tableandlist-repo-host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - r6tableandlist.zip
+      name: r6tableandlist
+      target-path: resources/
+- name: r6tableandlist
+  type: html5
+  path: .
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: r6tableandlist-dest-srv
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: r6tableandlist-dest-srv
+    service-plan: lite
+- name: r6tableandlist-uaa
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: r6tableandlist-xsuaa-srv
+    service-plan: application
+- name: r6tableandlist-repo-host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: r6tableandlist-html5-srv
+    service-plan: app-host
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true
